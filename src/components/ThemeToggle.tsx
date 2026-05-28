@@ -95,6 +95,7 @@ export default function ThemeToggle({
         const animationOptions: KeyframeAnimationOptions & { pseudoElement: string } = {
           duration: 650,
           easing: "cubic-bezier(0.4, 0, 0.2, 1)",
+          fill: "forwards",
           pseudoElement: isSwitchingToLight
             ? "::view-transition-new(root)"
             : "::view-transition-old(root)",
