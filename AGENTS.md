@@ -10,9 +10,9 @@
 
 | Command                      | Action                                                                                                      |
 | ---------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| `vp dev`                     | Dev server at `localhost:4321`                                                                              |
+| `vp run dev`                 | Dev server at `localhost:4321`                                                                              |
 | `vp run build`               | Production build to `./dist/` (`vp build` uses Vite directly and fails — must use `vp run build` for Astro) |
-| `vp preview`                 | Preview production build locally                                                                            |
+| `vp run preview`             | Preview production build locally                                                                            |
 | `vp astro add <integration>` | Add Astro integration                                                                                       |
 | `vp astro check`             | Run Astro type-checking                                                                                     |
 | `vp install`                 | Install dependencies                                                                                        |
@@ -33,6 +33,11 @@ src/
 
 - **Generated files** — `.astro/` (types) and `dist/` (build output) are gitignored. Do not edit manually.
 - **Astro MCP** is already configured in `opencode.jsonc` — ask docs queries via the MCP server or the Astro docs search tool.
+
+## Browser verification
+
+- **Always verify visual changes in the browser.** The user runs their own dev server on `localhost:4200`; open that URL to review any UI/visual change instead of starting a separate dev server.
+- **Always stop any server you start.** If you do launch a dev server or other long-running process yourself, shut it down before ending your response — never leave a background server running.
 
 <!--VITE PLUS START-->
 

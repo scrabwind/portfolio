@@ -10,9 +10,10 @@ type ThemeToggleProps = {
   darkModeLabel: string;
   switchToLightAriaLabel: string;
   switchToDarkAriaLabel: string;
+  className?: string;
 };
 
-function getCurrentTheme() {
+function getCurrentTheme(): ThemeMode {
   if (typeof document === "undefined") {
     return "light";
   }
@@ -20,17 +21,60 @@ function getCurrentTheme() {
   return document.documentElement.classList.contains("dark") ? "dark" : "light";
 }
 
+function SunIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="h-3.5 w-3.5"
+      aria-hidden="true"
+    >
+      <circle cx="12" cy="12" r="4" />
+      <path d="M12 2v2" />
+      <path d="M12 20v2" />
+      <path d="m4.93 4.93 1.41 1.41" />
+      <path d="m17.66 17.66 1.41 1.41" />
+      <path d="M2 12h2" />
+      <path d="M20 12h2" />
+      <path d="m6.34 17.66-1.41 1.41" />
+      <path d="m19.07 4.93-1.41 1.41" />
+    </svg>
+  );
+}
+
+function MoonIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="h-3.5 w-3.5"
+      aria-hidden="true"
+    >
+      <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+    </svg>
+  );
+}
+
 export default function ThemeToggle({
-  lightModeLabel,
-  darkModeLabel,
   switchToLightAriaLabel,
   switchToDarkAriaLabel,
+  className = "",
 }: ThemeToggleProps) {
   const [theme, setTheme] = useState<ThemeMode>(() => getCurrentTheme());
 
   useEffect(() => {
     setTheme(getCurrentTheme());
   }, []);
+
+  const isDark = theme === "dark";
 
   const toggleTheme = (event: MouseEvent<HTMLButtonElement>) => {
     const root = document.documentElement;
@@ -124,16 +168,30 @@ export default function ThemeToggle({
   return (
     <button
       type="button"
+      role="switch"
       onClick={toggleTheme}
-      className="fixed right-5 top-5 z-50 inline-flex items-center gap-2 rounded-full border border-brand-border bg-brand-surface px-4 py-2 text-xs font-semibold uppercase tracking-[0.08em] text-brand-text shadow-lg shadow-black/30 backdrop-blur transition hover:border-brand-accent-cyan hover:text-brand-accent-cyan"
-      aria-pressed={theme === "dark"}
-      aria-label={theme === "dark" ? switchToLightAriaLabel : switchToDarkAriaLabel}
+      aria-checked={isDark}
+      aria-label={isDark ? switchToLightAriaLabel : switchToDarkAriaLabel}
+      className={`relative inline-flex h-8 w-[3.75rem] shrink-0 items-center rounded-full border border-brand-border bg-brand-bg-alt px-1 shadow-sm transition hover:border-brand-accent-cyan ${className}`}
     >
       <span
         aria-hidden="true"
-        className={`h-2.5 w-2.5 rounded-full ${theme === "dark" ? "bg-brand-accent-cyan" : "bg-brand-accent-violet"}`}
-      />
-      {theme === "dark" ? lightModeLabel : darkModeLabel}
+        className={`pointer-events-none absolute left-2 transition-colors ${isDark ? "text-brand-subtle/50" : "text-brand-accent-violet"}`}
+      >
+        <SunIcon />
+      </span>
+      <span
+        aria-hidden="true"
+        className={`pointer-events-none absolute right-2 transition-colors ${isDark ? "text-brand-accent-cyan" : "text-brand-subtle/50"}`}
+      >
+        <MoonIcon />
+      </span>
+      <span
+        aria-hidden="true"
+        className={`pointer-events-none z-10 inline-flex h-6 w-6 items-center justify-center rounded-full bg-brand-surface text-brand-text shadow-md transition-transform duration-300 ease-out ${isDark ? "translate-x-[1.75rem]" : "translate-x-0"}`}
+      >
+        {isDark ? <MoonIcon /> : <SunIcon />}
+      </span>
     </button>
   );
 }

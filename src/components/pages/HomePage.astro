@@ -1,8 +1,10 @@
 ---
 import ExperienceTimeline from "../mockups/ExperienceTimeline.astro";
-import PortfolioHero from "../mockups/PortfolioHero.astro";
 import ProfileDetails from "../mockups/ProfileDetails.astro";
 import ProjectShowcase from "../mockups/ProjectShowcase.astro";
+import ContactBar from "../ContactBar";
+import LocaleMenu from "../LocaleMenu";
+import ThemeToggle from "../ThemeToggle";
 import Layout from "../../layouts/Layout.astro";
 import { getHomeCopy, type SupportedLocale } from "../../i18n/home";
 
@@ -12,20 +14,86 @@ interface Props {
 
 const { locale } = Astro.props;
 const copy = getHomeCopy(locale);
+
+const localeItems = [
+	{ code: "en", label: copy.languageSwitcher.englishLabel, href: "/en/" },
+	{ code: "pl", label: copy.languageSwitcher.polishLabel, href: "/pl/" },
+];
 ---
 
-<Layout
-	title={copy.pageTitle}
-	locale={locale}
-	themeToggle={copy.themeToggle}
-	languageSwitcher={copy.languageSwitcher}
->
-	<main class="mx-auto max-w-6xl px-6 py-16 sm:py-24">
-		<div class="space-y-8">
-			<PortfolioHero {...copy.hero} />
+<Layout title={copy.pageTitle} locale={locale}>
+	<div class="mx-auto max-w-6xl px-6 lg:flex lg:gap-10">
+		<aside
+			class="py-12 sm:py-16 lg:sticky lg:top-0 lg:max-h-screen lg:w-1/2 lg:overflow-y-auto lg:py-16"
+		>
+			<section
+				class="relative rounded-3xl border border-brand-border bg-brand-surface p-8 sm:p-10"
+			>
+				<div
+					aria-hidden="true"
+					class="pointer-events-none absolute inset-0 overflow-hidden rounded-3xl"
+				>
+					<div
+						class="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[radial-gradient(circle,_rgba(180,95,255,0.5)_0%,_rgba(99,240,227,0.16)_42%,_transparent_72%)] blur-2xl"
+					>
+					</div>
+				</div>
+				<div class="relative">
+					<div class="flex items-center justify-between gap-3">
+						<LocaleMenu
+							client:only="react"
+							label={copy.languageSwitcher.label}
+							currentLocale={locale}
+							items={localeItems}
+						/>
+						<ThemeToggle client:only="react" {...copy.themeToggle} />
+					</div>
+
+					<p class="mt-8 text-sm font-semibold uppercase tracking-[0.18em] text-brand-accent-cyan">
+						{copy.hero.eyebrow}
+					</p>
+					<h1 class="mt-4 text-4xl font-semibold tracking-tight text-brand-text sm:text-5xl">
+						{copy.hero.heading}
+					</h1>
+					<p class="mt-5 text-base leading-7 text-brand-muted">
+						{copy.hero.description}
+					</p>
+
+					<div class="mt-8 flex flex-wrap gap-3">
+						<a
+							href={copy.hero.primaryActionHref}
+							class="rounded-full border border-brand-accent-cyan bg-brand-accent-cyan/10 px-5 py-2.5 text-sm font-medium text-brand-text transition hover:bg-brand-accent-cyan/20"
+						>
+							{copy.hero.primaryActionLabel}
+						</a>
+						<a
+							href={copy.hero.secondaryActionHref}
+							class="rounded-full border border-brand-border bg-brand-bg-alt px-5 py-2.5 text-sm font-medium text-brand-muted hover:text-brand-text"
+						>
+							{copy.hero.secondaryActionLabel}
+						</a>
+					</div>
+
+					<ul class="mt-7 flex flex-wrap gap-2">
+						{
+							copy.hero.stack.map((item) => (
+								<li class="rounded-full border border-brand-border bg-brand-bg-alt px-3 py-1 text-xs font-medium text-brand-muted">
+									{item}
+								</li>
+							))
+						}
+					</ul>
+
+					<div id="contact" class="mt-8 border-t border-brand-border pt-6">
+						<ContactBar client:only="react" title={copy.contact.title} items={copy.contact.items} />
+					</div>
+				</div>
+			</section>
+		</aside>
+		<main class="space-y-8 pb-12 sm:pb-16 lg:w-1/2 lg:py-16">
 			<ProfileDetails {...copy.profile} />
 			<ExperienceTimeline {...copy.experience} />
 			<ProjectShowcase {...copy.projects} />
-		</div>
-	</main>
+		</main>
+	</div>
 </Layout>

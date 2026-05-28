@@ -40,10 +40,13 @@ type ProjectsCopy = {
   cards: ProjectCard[];
 };
 
-type ContactItem = {
+export type ContactIcon = "phone" | "email" | "linkedin" | "github";
+
+export type ContactItem = {
   label: string;
   value: string;
   href: string;
+  icon: ContactIcon;
 };
 
 type ProfileCopy = {
@@ -53,8 +56,11 @@ type ProfileCopy = {
   skills: string[];
   languagesTitle: string;
   languages: string[];
-  contactTitle: string;
-  contactItems: ContactItem[];
+};
+
+type ContactCopy = {
+  title: string;
+  items: ContactItem[];
 };
 
 type ThemeToggleCopy = {
@@ -74,6 +80,7 @@ export type HomeCopy = {
   pageTitle: string;
   hero: HeroCopy;
   profile: ProfileCopy;
+  contact: ContactCopy;
   experience: ExperienceCopy;
   projects: ProjectsCopy;
   themeToggle: ThemeToggleCopy;
@@ -129,20 +136,34 @@ const homeCopy: Record<SupportedLocale, HomeCopy> = {
       ],
       languagesTitle: "Languages",
       languages: ["Polish (Native)", "English (C1)"],
-      contactTitle: "Contact",
-      contactItems: [
-        { label: "Phone", value: "+48 663 059 136", href: "tel:+48663059136" },
+    },
+    contact: {
+      title: "Contact",
+      items: [
+        {
+          label: "Phone",
+          value: "+48 663 059 136",
+          href: "tel:+48663059136",
+          icon: "phone",
+        },
         {
           label: "Email",
           value: "ka.wiatrowski@gmail.com",
           href: "mailto:ka.wiatrowski@gmail.com",
+          icon: "email",
         },
         {
           label: "LinkedIn",
           value: "linkedin.com/in/kamil-wiatrowski",
           href: "https://www.linkedin.com/in/kamil-wiatrowski",
+          icon: "linkedin",
         },
-        { label: "GitHub", value: "github.com/scrabwind", href: "https://github.com/scrabwind" },
+        {
+          label: "GitHub",
+          value: "github.com/scrabwind",
+          href: "https://github.com/scrabwind",
+          icon: "github",
+        },
       ],
     },
     experience: {
@@ -225,8 +246,8 @@ const homeCopy: Record<SupportedLocale, HomeCopy> = {
     },
     languageSwitcher: {
       label: "Switch language",
-      englishLabel: "EN",
-      polishLabel: "PL",
+      englishLabel: "English",
+      polishLabel: "Polish",
     },
   },
   pl: {
@@ -277,20 +298,34 @@ const homeCopy: Record<SupportedLocale, HomeCopy> = {
       ],
       languagesTitle: "Jezyki",
       languages: ["Polski (ojczysty)", "Angielski (C1)"],
-      contactTitle: "Kontakt",
-      contactItems: [
-        { label: "Telefon", value: "+48 663 059 136", href: "tel:+48663059136" },
+    },
+    contact: {
+      title: "Kontakt",
+      items: [
+        {
+          label: "Telefon",
+          value: "+48 663 059 136",
+          href: "tel:+48663059136",
+          icon: "phone",
+        },
         {
           label: "Email",
           value: "ka.wiatrowski@gmail.com",
           href: "mailto:ka.wiatrowski@gmail.com",
+          icon: "email",
         },
         {
           label: "LinkedIn",
           value: "linkedin.com/in/kamil-wiatrowski",
           href: "https://www.linkedin.com/in/kamil-wiatrowski",
+          icon: "linkedin",
         },
-        { label: "GitHub", value: "github.com/scrabwind", href: "https://github.com/scrabwind" },
+        {
+          label: "GitHub",
+          value: "github.com/scrabwind",
+          href: "https://github.com/scrabwind",
+          icon: "github",
+        },
       ],
     },
     experience: {
@@ -373,8 +408,8 @@ const homeCopy: Record<SupportedLocale, HomeCopy> = {
     },
     languageSwitcher: {
       label: "Przelacz jezyk",
-      englishLabel: "EN",
-      polishLabel: "PL",
+      englishLabel: "Angielski",
+      polishLabel: "Polski",
     },
   },
 };

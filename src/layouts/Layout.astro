@@ -1,34 +1,13 @@
 ---
 import "../styles/global.css";
-import ThemeToggle from "../components/ThemeToggle";
 import type { SupportedLocale } from "../i18n/home";
-
-type ThemeToggleCopy = {
-	lightModeLabel: string;
-	darkModeLabel: string;
-	switchToLightAriaLabel: string;
-	switchToDarkAriaLabel: string;
-};
-
-type LanguageSwitcherCopy = {
-	label: string;
-	englishLabel: string;
-	polishLabel: string;
-};
 
 interface Props {
 	title?: string;
 	locale: SupportedLocale;
-	themeToggle: ThemeToggleCopy;
-	languageSwitcher: LanguageSwitcherCopy;
 }
 
-const { title = "Portfolio", locale, themeToggle, languageSwitcher } = Astro.props;
-
-const languageLinks = [
-	{ code: "en", label: languageSwitcher.englishLabel, href: "/en/" },
-	{ code: "pl", label: languageSwitcher.polishLabel, href: "/pl/" },
-];
+const { title = "Portfolio", locale } = Astro.props;
 ---
 
 <!doctype html>
@@ -70,28 +49,6 @@ const languageLinks = [
 		</script>
 	</head>
 	<body>
-		<nav
-			aria-label={languageSwitcher.label}
-			class="fixed left-5 top-5 z-50 inline-flex items-center gap-1 rounded-full border border-brand-border bg-brand-surface px-2 py-1 text-xs font-semibold uppercase tracking-[0.08em] shadow-lg shadow-black/30 backdrop-blur"
-		>
-			{
-				languageLinks.map((link) => (
-					<a
-						href={link.href}
-						aria-current={locale === link.code ? "page" : undefined}
-						class:list={[
-							"rounded-full px-2.5 py-1 transition",
-							locale === link.code
-								? "bg-brand-accent-cyan/15 text-brand-text"
-								: "text-brand-muted hover:text-brand-text",
-						]}
-					>
-						{link.label}
-					</a>
-				))
-			}
-		</nav>
-		<ThemeToggle client:only="react" {...themeToggle} />
 		<slot />
 	</body>
 </html>
