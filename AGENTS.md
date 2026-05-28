@@ -10,7 +10,7 @@
 
 | Command                      | Action                                                                                                      |
 | ---------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| `vp run dev`                 | Dev server at `localhost:4321`                                                                              |
+| `vp run dev --port 4200`     | Dev server at `localhost:4200`                                                                              |
 | `vp run build`               | Production build to `./dist/` (`vp build` uses Vite directly and fails — must use `vp run build` for Astro) |
 | `vp run preview`             | Preview production build locally                                                                            |
 | `vp astro add <integration>` | Add Astro integration                                                                                       |
@@ -36,7 +36,7 @@ src/
 
 ## Browser verification
 
-- **Always verify visual changes in the browser.** The user runs their own dev server on `localhost:4200`; open that URL to review any UI/visual change instead of starting a separate dev server.
+- **Always verify visual changes in the browser.** Open dev server to review any UI/visual change.
 - **Always stop any server you start.** If you do launch a dev server or other long-running process yourself, shut it down before ending your response — never leave a background server running.
 
 <!--VITE PLUS START-->
