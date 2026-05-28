@@ -5,6 +5,13 @@ let transitionSequence = 0;
 
 type ThemeMode = "light" | "dark";
 
+type ThemeToggleProps = {
+  lightModeLabel: string;
+  darkModeLabel: string;
+  switchToLightAriaLabel: string;
+  switchToDarkAriaLabel: string;
+};
+
 function getCurrentTheme() {
   if (typeof document === "undefined") {
     return "light";
@@ -13,7 +20,12 @@ function getCurrentTheme() {
   return document.documentElement.classList.contains("dark") ? "dark" : "light";
 }
 
-export default function ThemeToggle() {
+export default function ThemeToggle({
+  lightModeLabel,
+  darkModeLabel,
+  switchToLightAriaLabel,
+  switchToDarkAriaLabel,
+}: ThemeToggleProps) {
   const [theme, setTheme] = useState<ThemeMode>(() => getCurrentTheme());
 
   useEffect(() => {
@@ -114,13 +126,13 @@ export default function ThemeToggle() {
       onClick={toggleTheme}
       className="fixed right-5 top-5 z-50 inline-flex items-center gap-2 rounded-full border border-brand-border bg-brand-surface px-4 py-2 text-xs font-semibold uppercase tracking-[0.08em] text-brand-text shadow-lg shadow-black/30 backdrop-blur transition hover:border-brand-accent-cyan hover:text-brand-accent-cyan"
       aria-pressed={theme === "dark"}
-      aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
+      aria-label={theme === "dark" ? switchToLightAriaLabel : switchToDarkAriaLabel}
     >
       <span
         aria-hidden="true"
         className={`h-2.5 w-2.5 rounded-full ${theme === "dark" ? "bg-brand-accent-cyan" : "bg-brand-accent-violet"}`}
       />
-      {theme === "dark" ? "Light mode" : "Dark mode"}
+      {theme === "dark" ? lightModeLabel : darkModeLabel}
     </button>
   );
 }

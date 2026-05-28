@@ -1,16 +1,53 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import ExperienceTimeline from "../components/mockups/ExperienceTimeline.astro";
-import PortfolioHero from "../components/mockups/PortfolioHero.astro";
-import ProjectShowcase from "../components/mockups/ProjectShowcase.astro";
 ---
 
-<Layout title="Dark Portfolio Mockup">
-	<main class="mx-auto max-w-6xl px-6 py-16 sm:py-24">
-		<div class="space-y-8">
-			<PortfolioHero />
-			<ExperienceTimeline />
-			<ProjectShowcase />
-		</div>
-	</main>
-</Layout>
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Redirecting...</title>
+		<meta http-equiv="refresh" content="0;url=/en/" />
+		<script is:inline>
+			(() => {
+				const localeStorageKey = "preferred-locale";
+				const supportedLocales = ["en", "pl"];
+				const fallbackLocale = "en";
+
+				const normalizeLocale = (value) => {
+					const lower = value.toLowerCase();
+					if (lower === "pl" || lower.startsWith("pl-")) {
+						return "pl";
+					}
+					if (lower === "en" || lower.startsWith("en-")) {
+						return "en";
+					}
+					return null;
+				};
+
+				const storedLocale = (() => {
+					try {
+						return localStorage.getItem(localeStorageKey);
+					} catch {
+						return null;
+					}
+				})();
+
+				const normalizedStoredLocale = storedLocale ? normalizeLocale(storedLocale) : null;
+				const preferredBrowserLocale =
+					navigator.languages?.map(normalizeLocale).find((locale) => locale !== null) ??
+					normalizeLocale(navigator.language);
+				const targetLocale =
+					normalizedStoredLocale ??
+					preferredBrowserLocale ??
+					fallbackLocale;
+				const safeTargetLocale = supportedLocales.includes(targetLocale) ? targetLocale : fallbackLocale;
+
+				window.location.replace(`/${safeTargetLocale}/`);
+			})();
+		</script>
+	</head>
+	<body>
+		<p>Redirecting...</p>
+	</body>
+</html>

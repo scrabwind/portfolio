@@ -1,0 +1,29 @@
+---
+import ExperienceTimeline from "../mockups/ExperienceTimeline.astro";
+import PortfolioHero from "../mockups/PortfolioHero.astro";
+import ProjectShowcase from "../mockups/ProjectShowcase.astro";
+import Layout from "../../layouts/Layout.astro";
+import { getHomeCopy, type SupportedLocale } from "../../i18n/home";
+
+interface Props {
+	locale: SupportedLocale;
+}
+
+const { locale } = Astro.props;
+const copy = getHomeCopy(locale);
+---
+
+<Layout
+	title={copy.pageTitle}
+	locale={locale}
+	themeToggle={copy.themeToggle}
+	languageSwitcher={copy.languageSwitcher}
+>
+	<main class="mx-auto max-w-6xl px-6 py-16 sm:py-24">
+		<div class="space-y-8">
+			<PortfolioHero {...copy.hero} />
+			<ExperienceTimeline {...copy.experience} />
+			<ProjectShowcase {...copy.projects} />
+		</div>
+	</main>
+</Layout>

@@ -1,5 +1,14 @@
 ---
-const stack = ["JavaScript", "TypeScript", "React", "Astro", "Accessibility"];
+interface Props {
+	eyebrow: string;
+	heading: string;
+	description: string;
+	primaryActionLabel: string;
+	secondaryActionLabel: string;
+	stack: string[];
+}
+
+const { eyebrow, heading, description, primaryActionLabel, secondaryActionLabel, stack } = Astro.props;
 ---
 
 <section class="relative overflow-hidden rounded-3xl border border-brand-border bg-brand-surface p-8 sm:p-10">
@@ -9,27 +18,26 @@ const stack = ["JavaScript", "TypeScript", "React", "Astro", "Accessibility"];
 	/>
 	<div class="relative max-w-3xl">
 		<p class="text-sm font-semibold uppercase tracking-[0.18em] text-brand-accent-cyan">
-			Dark Theme Mockup
+			{eyebrow}
 		</p>
 		<h1 class="mt-4 text-4xl font-semibold tracking-tight text-brand-text sm:text-5xl">
-			Hi, I build polished interfaces for the web.
+			{heading}
 		</h1>
 		<p class="mt-5 max-w-2xl text-base leading-7 text-brand-muted">
-			This hero block demonstrates how the new color tokens look with layered surfaces, high contrast
-			typography, and subtle neon accents inspired by your reference screenshots.
+			{description}
 		</p>
 		<div class="mt-8 flex flex-wrap gap-3">
 			<a
 				href="#projects"
 				class="rounded-full border border-brand-accent-cyan bg-brand-accent-cyan/10 px-5 py-2.5 text-sm font-medium text-brand-text transition hover:bg-brand-accent-cyan/20"
 			>
-				View projects
+				{primaryActionLabel}
 			</a>
 			<a
 				href="#experience"
 				class="rounded-full border border-brand-border bg-brand-bg-alt px-5 py-2.5 text-sm font-medium text-brand-muted hover:text-brand-text"
 			>
-				Read experience
+				{secondaryActionLabel}
 			</a>
 		</div>
 		<ul class="mt-7 flex flex-wrap gap-2">

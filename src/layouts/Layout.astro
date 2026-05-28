@@ -1,16 +1,38 @@
 ---
 import "../styles/global.css";
 import ThemeToggle from "../components/ThemeToggle";
+import type { SupportedLocale } from "../i18n/home";
+
+type ThemeToggleCopy = {
+	lightModeLabel: string;
+	darkModeLabel: string;
+	switchToLightAriaLabel: string;
+	switchToDarkAriaLabel: string;
+};
+
+type LanguageSwitcherCopy = {
+	label: string;
+	englishLabel: string;
+	polishLabel: string;
+};
 
 interface Props {
 	title?: string;
+	locale: SupportedLocale;
+	themeToggle: ThemeToggleCopy;
+	languageSwitcher: LanguageSwitcherCopy;
 }
 
-const { title = "Portfolio" } = Astro.props;
+const { title = "Portfolio", locale, themeToggle, languageSwitcher } = Astro.props;
+
+const languageLinks = [
+	{ code: "en", label: languageSwitcher.englishLabel, href: "/en/" },
+	{ code: "pl", label: languageSwitcher.polishLabel, href: "/pl/" },
+];
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={locale}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
@@ -34,9 +56,42 @@ const { title = "Portfolio" } = Astro.props;
 				document.documentElement.classList.toggle("dark", shouldUseDark);
 			})();
 		</script>
+		<script is:inline>
+			(() => {
+				const localeStorageKey = "preferred-locale";
+				const activeLocale = document.documentElement.lang;
+
+				try {
+					localStorage.setItem(localeStorageKey, activeLocale);
+				} catch {
+					// Ignore storage access issues (privacy mode, blocked cookies, etc.).
+				}
+			})();
+		</script>
 	</head>
 	<body>
-		<ThemeToggle client:only="react" />
+		<nav
+			aria-label={languageSwitcher.label}
+			class="fixed left-5 top-5 z-50 inline-flex items-center gap-1 rounded-full border border-brand-border bg-brand-surface px-2 py-1 text-xs font-semibold uppercase tracking-[0.08em] shadow-lg shadow-black/30 backdrop-blur"
+		>
+			{
+				languageLinks.map((link) => (
+					<a
+						href={link.href}
+						aria-current={locale === link.code ? "page" : undefined}
+						class:list={[
+							"rounded-full px-2.5 py-1 transition",
+							locale === link.code
+								? "bg-brand-accent-cyan/15 text-brand-text"
+								: "text-brand-muted hover:text-brand-text",
+						]}
+					>
+						{link.label}
+					</a>
+				))
+			}
+		</nav>
+		<ThemeToggle client:only="react" {...themeToggle} />
 		<slot />
 	</body>
 </html>

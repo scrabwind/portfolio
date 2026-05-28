@@ -1,32 +1,29 @@
 ---
-const projects = [
-	{
-		name: "Neon Portfolio",
-		summary: "A one-page portfolio concept with animated gradients and section-based navigation.",
-		stack: "Astro - Tailwind",
-	},
-	{
-		name: "Component Vault",
-		summary: "A design-system playground for documenting reusable patterns and accessibility states.",
-		stack: "React - Storybook",
-	},
-	{
-		name: "Shipboard",
-		summary: "A clean dashboard UI for tracking feature rollout status across multiple product squads.",
-		stack: "TypeScript - Charts",
-	},
-];
+interface ProjectCard {
+	name: string;
+	summary: string;
+	stack: string;
+}
+
+interface Props {
+	title: string;
+	description: string;
+	caseStudyLabel: string;
+	cards: ProjectCard[];
+}
+
+const { title, description, caseStudyLabel, cards } = Astro.props;
 ---
 
 <section id="projects" class="rounded-3xl border border-brand-border bg-brand-surface p-8 sm:p-10">
-	<h2 class="text-2xl font-semibold text-brand-text sm:text-3xl">Projects</h2>
+	<h2 class="text-2xl font-semibold text-brand-text sm:text-3xl">{title}</h2>
 	<p class="mt-3 max-w-2xl text-sm leading-6 text-brand-muted">
-		Mock cards using the dark palette for card surfaces, accent borders, and muted typography hierarchy.
+		{description}
 	</p>
 
 	<div class="mt-7 grid gap-4 md:grid-cols-3">
 		{
-			projects.map((project, index) => (
+			cards.map((project, index) => (
 				<article
 					class:list={[
 						"rounded-2xl border bg-brand-bg-alt p-5 transition hover:-translate-y-0.5",
@@ -42,7 +39,7 @@ const projects = [
 						href="#"
 						class="mt-5 inline-flex text-sm font-medium text-brand-accent-cyan transition hover:text-brand-text"
 					>
-						Open case study ->
+						{caseStudyLabel}
 					</a>
 				</article>
 			))
