@@ -7,7 +7,9 @@ type HeroCopy = {
   heading: string;
   description: string;
   primaryActionLabel: string;
+  primaryActionHref: string;
   secondaryActionLabel: string;
+  secondaryActionHref: string;
   stack: string[];
 };
 
@@ -38,6 +40,23 @@ type ProjectsCopy = {
   cards: ProjectCard[];
 };
 
+type ContactItem = {
+  label: string;
+  value: string;
+  href: string;
+};
+
+type ProfileCopy = {
+  title: string;
+  summary: string;
+  skillsTitle: string;
+  skills: string[];
+  languagesTitle: string;
+  languages: string[];
+  contactTitle: string;
+  contactItems: ContactItem[];
+};
+
 type ThemeToggleCopy = {
   lightModeLabel: string;
   darkModeLabel: string;
@@ -54,6 +73,7 @@ type LanguageSwitcherCopy = {
 export type HomeCopy = {
   pageTitle: string;
   hero: HeroCopy;
+  profile: ProfileCopy;
   experience: ExperienceCopy;
   projects: ProjectsCopy;
   themeToggle: ThemeToggleCopy;
@@ -62,69 +82,138 @@ export type HomeCopy = {
 
 const homeCopy: Record<SupportedLocale, HomeCopy> = {
   en: {
-    pageTitle: "Dark Portfolio Mockup",
+    pageTitle: "Kamil Wiatrowski | Frontend Developer",
     hero: {
-      eyebrow: "Dark Theme Mockup",
-      heading: "Hi, I build polished interfaces for the web.",
+      eyebrow: "Frontend Developer",
+      heading: "Kamil Wiatrowski",
       description:
-        "This hero block demonstrates how the new color tokens look with layered surfaces, high contrast typography, and subtle neon accents inspired by your reference screenshots.",
-      primaryActionLabel: "View projects",
-      secondaryActionLabel: "Read experience",
-      stack: ["JavaScript", "TypeScript", "React", "Astro", "Accessibility"],
+        "Frontend Developer with commercial experience across transportation, automotive, and e-commerce projects. I build web applications, CMS platforms, and business tools with international teams.",
+      primaryActionLabel: "Get in touch",
+      primaryActionHref: "#contact",
+      secondaryActionLabel: "View experience",
+      secondaryActionHref: "#experience",
+      stack: ["JavaScript", "TypeScript", "Vue.js", "React", "Nuxt", "Next.js"],
+    },
+    profile: {
+      title: "Professional profile",
+      summary:
+        "I create and develop modern web applications with a strong focus on maintainable frontend architecture and clear collaboration with clients. My work includes custom CMS systems, business platforms, and production interfaces delivered in multinational environments.",
+      skillsTitle: "Core skills",
+      skills: [
+        "JavaScript",
+        "TypeScript",
+        "Vue.js",
+        "React",
+        "Angular",
+        "Nuxt",
+        "Next.js",
+        "HTML5",
+        "CSS3",
+        "Sass",
+        "Tailwind CSS",
+        "Playwright",
+        "Cypress",
+        "Jest",
+        "REST API",
+        "GraphQL",
+        "Node.js",
+        "Express",
+        "NestJS",
+        "Docker",
+        "CI/CD",
+        "Git",
+        "Jira",
+        "Windows",
+        "MacOS",
+        "Linux",
+      ],
+      languagesTitle: "Languages",
+      languages: ["Polish (Native)", "English (C1)"],
+      contactTitle: "Contact",
+      contactItems: [
+        { label: "Phone", value: "+48 663 059 136", href: "tel:+48663059136" },
+        {
+          label: "Email",
+          value: "ka.wiatrowski@gmail.com",
+          href: "mailto:ka.wiatrowski@gmail.com",
+        },
+        {
+          label: "LinkedIn",
+          value: "linkedin.com/in/kamil-wiatrowski",
+          href: "https://www.linkedin.com/in/kamil-wiatrowski",
+        },
+        { label: "GitHub", value: "github.com/scrabwind", href: "https://github.com/scrabwind" },
+      ],
     },
     experience: {
-      title: "Experience",
+      title: "Work experience",
       timelineLabel: "Timeline",
       roles: [
         {
-          years: "2024 - Present",
-          title: "Senior Frontend Engineer",
-          company: "Klaviyo",
+          years: "02/2025 - Present",
+          title: "Frontend Developer",
+          company: "Appwise",
           description:
-            "Driving accessibility and consistency across a shared component library while partnering with design and product teams.",
-          tags: ["React", "Design Systems", "a11y"],
+            "Delivering frontend features for client products and collaborating in multinational teams.",
+          tags: ["Frontend", "Client Projects", "Team Collaboration"],
         },
         {
-          years: "2021 - 2024",
-          title: "Frontend Engineer",
-          company: "Product Studio",
+          years: "04/2024 - 02/2025",
+          title: "Frontend Developer",
+          company: "Nexio Management",
           description:
-            "Shipped responsive interfaces, component abstractions, and documentation workflows for multiple client products.",
-          tags: ["TypeScript", "Storybook", "Testing"],
+            "Implemented frontend views based on client requirements and prepared graphic designs, including contractor work on the University of Hull landing page.",
+          tags: ["Design to Code", "Responsive UI", "Stakeholder Alignment"],
         },
         {
-          years: "2019 - 2021",
-          title: "UI Developer",
-          company: "Startup Team",
+          years: "11/2022 - 04/2024",
+          title: "Frontend Developer",
+          company: "Reffine",
           description:
-            "Built high-conversion landing pages and migration-ready frontends with a focus on maintainable CSS architecture.",
-          tags: ["CSS", "Performance", "SEO"],
+            "Developed and maintained a transportation TMS system, implementing modules for fleet, drivers, contractors, and contract management while working directly with the client.",
+          tags: ["TypeScript", "TMS", "REST API"],
+        },
+        {
+          years: "08/2021 - 11/2022",
+          title: "Frontend Developer",
+          company: "Digital Colliers",
+          description:
+            "Developed a custom CMS for Jaguar and Land Rover and helped deliver platform features used in Tier 2 market websites across multiple countries.",
+          tags: ["CMS", "Automotive", "Enterprise Delivery"],
+        },
+        {
+          years: "07/2020 - 07/2021",
+          title: "QA Engineer",
+          company: "Biuromax-Balcer",
+          description:
+            "Tested an application for construction-company management and implemented automated tests to streamline quality verification.",
+          tags: ["QA", "Test Automation", "Business Platform"],
         },
       ],
     },
     projects: {
-      title: "Projects",
+      title: "Selected commercial projects",
       description:
-        "Mock cards using the dark palette for card surfaces, accent borders, and muted typography hierarchy.",
-      caseStudyLabel: "Open case study ->",
+        "Highlights based on real client delivery from transportation, automotive, and education domains.",
+      caseStudyLabel: "Delivered in commercial environment",
       cards: [
         {
-          name: "Neon Portfolio",
+          name: "Transportation TMS platform",
           summary:
-            "A one-page portfolio concept with animated gradients and section-based navigation.",
-          stack: "Astro - Tailwind",
+            "Development and maintenance of a transportation management system with features for fleet, driver, contractor, and contract workflows.",
+          stack: "TypeScript - Vue.js - REST API",
         },
         {
-          name: "Component Vault",
+          name: "Jaguar and Land Rover CMS",
           summary:
-            "A design-system playground for documenting reusable patterns and accessibility states.",
-          stack: "React - Storybook",
+            "Custom CMS development for brand websites and contribution to Tier 2 market platform rollout in multiple countries.",
+          stack: "CMS - Frontend - Automotive",
         },
         {
-          name: "Shipboard",
+          name: "University of Hull landing page",
           summary:
-            "A clean dashboard UI for tracking feature rollout status across multiple product squads.",
-          stack: "TypeScript - Charts",
+            "Contractor delivery of a marketing landing page, translating graphic design and business requirements into responsive views.",
+          stack: "Responsive UI - Delivery - Collaboration",
         },
       ],
     },
@@ -141,69 +230,138 @@ const homeCopy: Record<SupportedLocale, HomeCopy> = {
     },
   },
   pl: {
-    pageTitle: "Makieta portfolio",
+    pageTitle: "Kamil Wiatrowski | Frontend Developer",
     hero: {
-      eyebrow: "Makieta ciemnego motywu",
-      heading: "Czesc, tworzę dopracowane interfejsy webowe.",
+      eyebrow: "Frontend Developer",
+      heading: "Kamil Wiatrowski",
       description:
-        "Ten blok hero pokazuje, jak wygladaja nowe tokeny kolorow z warstwowymi powierzchniami, mocnym kontrastem typografii i subtelnymi neonowymi akcentami.",
-      primaryActionLabel: "Zobacz projekty",
-      secondaryActionLabel: "Przeczytaj doswiadczenie",
-      stack: ["JavaScript", "TypeScript", "React", "Astro", "Dostepnosc"],
+        "Frontend Developer z doswiadczeniem komercyjnym w projektach z obszaru transportu, motoryzacji i e-commerce. Tworze aplikacje webowe, systemy CMS i platformy biznesowe w miedzynarodowych zespolach.",
+      primaryActionLabel: "Skontaktuj sie",
+      primaryActionHref: "#contact",
+      secondaryActionLabel: "Zobacz doswiadczenie",
+      secondaryActionHref: "#experience",
+      stack: ["JavaScript", "TypeScript", "Vue.js", "React", "Nuxt", "Next.js"],
+    },
+    profile: {
+      title: "Profil zawodowy",
+      summary:
+        "Tworze i rozwijam nowoczesne aplikacje webowe z naciskiem na utrzymywalna architekture frontendu i dobra komunikacje z klientem. Realizuje customowe systemy CMS, platformy biznesowe oraz interfejsy produkcyjne dostarczane w zespolach miedzynarodowych.",
+      skillsTitle: "Glowne umiejetnosci",
+      skills: [
+        "JavaScript",
+        "TypeScript",
+        "Vue.js",
+        "React",
+        "Angular",
+        "Nuxt",
+        "Next.js",
+        "HTML5",
+        "CSS3",
+        "Sass",
+        "Tailwind CSS",
+        "Playwright",
+        "Cypress",
+        "Jest",
+        "REST API",
+        "GraphQL",
+        "Node.js",
+        "Express",
+        "NestJS",
+        "Docker",
+        "CI/CD",
+        "Git",
+        "Jira",
+        "Windows",
+        "MacOS",
+        "Linux",
+      ],
+      languagesTitle: "Jezyki",
+      languages: ["Polski (ojczysty)", "Angielski (C1)"],
+      contactTitle: "Kontakt",
+      contactItems: [
+        { label: "Telefon", value: "+48 663 059 136", href: "tel:+48663059136" },
+        {
+          label: "Email",
+          value: "ka.wiatrowski@gmail.com",
+          href: "mailto:ka.wiatrowski@gmail.com",
+        },
+        {
+          label: "LinkedIn",
+          value: "linkedin.com/in/kamil-wiatrowski",
+          href: "https://www.linkedin.com/in/kamil-wiatrowski",
+        },
+        { label: "GitHub", value: "github.com/scrabwind", href: "https://github.com/scrabwind" },
+      ],
     },
     experience: {
-      title: "Doswiadczenie",
-      timelineLabel: "Os czasu",
+      title: "Doswiadczenie zawodowe",
+      timelineLabel: "Timeline",
       roles: [
         {
-          years: "2024 - Obecnie",
-          title: "Senior Frontend Engineer",
-          company: "Klaviyo",
+          years: "02/2025 - Obecnie",
+          title: "Frontend Developer",
+          company: "Appwise",
           description:
-            "Prowadzenie prac nad dostepnoscia i spojnoscia we wspolnej bibliotece komponentow we wspolpracy z zespolami designu i produktu.",
-          tags: ["React", "Design Systems", "a11y"],
+            "Dostarczanie funkcjonalnosci frontendowych dla produktow klienckich oraz praca w zespolach miedzynarodowych.",
+          tags: ["Frontend", "Projekty klienckie", "Wspolpraca zespolowa"],
         },
         {
-          years: "2021 - 2024",
-          title: "Frontend Engineer",
-          company: "Product Studio",
+          years: "04/2024 - 02/2025",
+          title: "Frontend Developer",
+          company: "Nexio Management",
           description:
-            "Dostarczanie responsywnych interfejsow, abstrakcji komponentow i procesow dokumentacji dla wielu produktow klienckich.",
-          tags: ["TypeScript", "Storybook", "Testy"],
+            "Implementacja widokow na podstawie wymagan klienta i projektow graficznych, w tym realizacja landing page dla University of Hull jako kontraktor.",
+          tags: ["Design to Code", "Responsive UI", "Wspolpraca z klientem"],
         },
         {
-          years: "2019 - 2021",
-          title: "UI Developer",
-          company: "Startup Team",
+          years: "11/2022 - 04/2024",
+          title: "Frontend Developer",
+          company: "Reffine",
           description:
-            "Budowanie landing page'y o wysokiej konwersji oraz frontendow gotowych na migracje z naciskiem na utrzymywalna architekture CSS.",
-          tags: ["CSS", "Wydajnosc", "SEO"],
+            "Rozwoj i utrzymanie systemu TMS dla branzy transportowej, obejmujacego moduly floty, kierowcow, kontrahentow i umow, z bezposrednia wspolpraca z klientem.",
+          tags: ["TypeScript", "TMS", "REST API"],
+        },
+        {
+          years: "08/2021 - 11/2022",
+          title: "Frontend Developer",
+          company: "Digital Colliers",
+          description:
+            "Tworzenie customowego CMS dla marek Jaguar i Land Rover oraz udzial w dostarczaniu funkcjonalnosci dla platformy rynkow Tier 2 w wielu krajach.",
+          tags: ["CMS", "Motoryzacja", "Enterprise Delivery"],
+        },
+        {
+          years: "07/2020 - 07/2021",
+          title: "QA Engineer",
+          company: "Biuromax-Balcer",
+          description:
+            "Testowanie aplikacji do zarzadzania firmami budowlanymi oraz implementacja testow automatycznych usprawniajacych weryfikacje jakosci.",
+          tags: ["QA", "Automatyzacja testow", "Platforma biznesowa"],
         },
       ],
     },
     projects: {
-      title: "Projekty",
+      title: "Wybrane projekty komercyjne",
       description:
-        "Przykladowe karty wykorzystujace ciemna palete dla powierzchni kart, akcentowych ramek i hierarchii stonowanej typografii.",
-      caseStudyLabel: "Otworz case study ->",
+        "Najwazniejsze realizacje oparte na rzeczywistej pracy dla klientow z obszaru transportu, motoryzacji i edukacji.",
+      caseStudyLabel: "Zrealizowane komercyjnie",
       cards: [
         {
-          name: "Neon Portfolio",
+          name: "Platforma TMS dla transportu",
           summary:
-            "Jednostronicowa koncepcja portfolio z animowanymi gradientami i nawigacja oparta o sekcje.",
-          stack: "Astro - Tailwind",
+            "Rozwoj i utrzymanie systemu transportowego z funkcjami zarzadzania flota, kierowcami, kontrahentami i umowami.",
+          stack: "TypeScript - Vue.js - REST API",
         },
         {
-          name: "Component Vault",
+          name: "CMS Jaguar i Land Rover",
           summary:
-            "Playground design systemu do dokumentowania wielokrotnego uzycia wzorcow i stanow dostepnosci.",
-          stack: "React - Storybook",
+            "Budowa customowego CMS dla stron marek oraz wsparcie wdrozen platformy na rynkach Tier 2 w wielu krajach.",
+          stack: "CMS - Frontend - Motoryzacja",
         },
         {
-          name: "Shipboard",
+          name: "Landing page University of Hull",
           summary:
-            "Przejrzysty interfejs dashboardu do sledzenia statusu wdrozenia funkcji w wielu zespolach produktowych.",
-          stack: "TypeScript - Wykresy",
+            "Realizacja strony landingowej jako kontraktor, od projektu graficznego i wymagan biznesowych do responsywnej implementacji.",
+          stack: "Responsive UI - Delivery - Collaboration",
         },
       ],
     },

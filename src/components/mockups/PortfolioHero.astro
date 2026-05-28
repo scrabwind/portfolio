@@ -4,11 +4,14 @@ interface Props {
 	heading: string;
 	description: string;
 	primaryActionLabel: string;
+	primaryActionHref: string;
 	secondaryActionLabel: string;
+	secondaryActionHref: string;
 	stack: string[];
 }
 
-const { eyebrow, heading, description, primaryActionLabel, secondaryActionLabel, stack } = Astro.props;
+const { eyebrow, heading, description, primaryActionLabel, primaryActionHref, secondaryActionLabel, secondaryActionHref, stack } =
+	Astro.props;
 ---
 
 <section class="relative overflow-hidden rounded-3xl border border-brand-border bg-brand-surface p-8 sm:p-10">
@@ -28,13 +31,13 @@ const { eyebrow, heading, description, primaryActionLabel, secondaryActionLabel,
 		</p>
 		<div class="mt-8 flex flex-wrap gap-3">
 			<a
-				href="#projects"
+				href={primaryActionHref}
 				class="rounded-full border border-brand-accent-cyan bg-brand-accent-cyan/10 px-5 py-2.5 text-sm font-medium text-brand-text transition hover:bg-brand-accent-cyan/20"
 			>
 				{primaryActionLabel}
 			</a>
 			<a
-				href="#experience"
+				href={secondaryActionHref}
 				class="rounded-full border border-brand-border bg-brand-bg-alt px-5 py-2.5 text-sm font-medium text-brand-muted hover:text-brand-text"
 			>
 				{secondaryActionLabel}

@@ -1,6 +1,7 @@
 ---
 import ExperienceTimeline from "../mockups/ExperienceTimeline.astro";
 import PortfolioHero from "../mockups/PortfolioHero.astro";
+import ProfileDetails from "../mockups/ProfileDetails.astro";
 import ProjectShowcase from "../mockups/ProjectShowcase.astro";
 import Layout from "../../layouts/Layout.astro";
 import { getHomeCopy, type SupportedLocale } from "../../i18n/home";
@@ -22,6 +23,7 @@ const copy = getHomeCopy(locale);
 	<main class="mx-auto max-w-6xl px-6 py-16 sm:py-24">
 		<div class="space-y-8">
 			<PortfolioHero {...copy.hero} />
+			<ProfileDetails {...copy.profile} />
 			<ExperienceTimeline {...copy.experience} />
 			<ProjectShowcase {...copy.projects} />
 		</div>
