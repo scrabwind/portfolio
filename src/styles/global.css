@@ -1,1 +1,81 @@
 @import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --color-brand-bg: #f4f7ff;
+  --color-brand-bg-alt: #fcfdff;
+  --color-brand-surface: #ffffff;
+  --color-brand-surface-strong: #dbe5fb;
+  --color-brand-text: #111a32;
+  --color-brand-muted: #4f5f7f;
+  --color-brand-subtle: #73829f;
+  --color-brand-border: #ced9f1;
+  --color-brand-accent-violet: #8e3dff;
+  --color-brand-accent-cyan: #1ea8d8;
+  --color-brand-accent-blue: #4b6cff;
+  --color-brand-focus-ring: #8e3dff;
+}
+
+:root {
+  color-scheme: light;
+}
+
+:root.dark {
+  color-scheme: dark;
+  --color-brand-bg: #040612;
+  --color-brand-bg-alt: #060917;
+  --color-brand-surface: #0b1230;
+  --color-brand-surface-strong: #101b3d;
+  --color-brand-text: #f3f7ff;
+  --color-brand-muted: #b5c2dd;
+  --color-brand-subtle: #7b8aa8;
+  --color-brand-border: #1a2a4b;
+  --color-brand-accent-violet: #b45fff;
+  --color-brand-accent-cyan: #63f0e3;
+  --color-brand-accent-blue: #4b6cff;
+  --color-brand-focus-ring: #b45fff;
+}
+
+@layer base {
+  * {
+    transition:
+      background-color 0.3s ease,
+      background 0.3s ease,
+      color 0.15s ease,
+      border-color 0.3s ease;
+  }
+
+  html,
+  body {
+    min-height: 100%;
+  }
+
+  body {
+    @apply font-sans antialiased;
+    background-color: var(--color-brand-bg);
+    background-image:
+      radial-gradient(
+        ellipse at top,
+        color-mix(in srgb, var(--color-brand-accent-violet) 14%, transparent) 0%,
+        transparent 45%
+      ),
+      radial-gradient(
+        ellipse at bottom,
+        color-mix(in srgb, var(--color-brand-accent-cyan) 10%, transparent) 0%,
+        transparent 35%
+      );
+    color: var(--color-brand-text);
+  }
+
+  ::selection {
+    background-color: color-mix(in srgb, var(--color-brand-accent-violet) 42%, transparent);
+    color: var(--color-brand-text);
+  }
+
+  *:focus-visible {
+    outline: 2px solid var(--color-brand-focus-ring);
+    outline-offset: 2px;
+  }
+}

@@ -1,11 +1,16 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Layout from "../layouts/Layout.astro";
+import ExperienceTimeline from "../components/mockups/ExperienceTimeline.astro";
+import PortfolioHero from "../components/mockups/PortfolioHero.astro";
+import ProjectShowcase from "../components/mockups/ProjectShowcase.astro";
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Dark Portfolio Mockup">
+	<main class="mx-auto max-w-6xl px-6 py-16 sm:py-24">
+		<div class="space-y-8">
+			<PortfolioHero />
+			<ExperienceTimeline />
+			<ProjectShowcase />
+		</div>
+	</main>
 </Layout>
