@@ -79,3 +79,32 @@
     outline-offset: 2px;
   }
 }
+
+@supports (view-transition-name: root) {
+  ::view-transition-group(root),
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    mix-blend-mode: normal;
+  }
+
+  :root.theme-transition-to-light::view-transition-old(root) {
+    z-index: 1;
+  }
+
+  :root.theme-transition-to-light::view-transition-new(root) {
+    z-index: 2;
+  }
+
+  :root.theme-transition-to-dark::view-transition-old(root) {
+    z-index: 2;
+  }
+
+  :root.theme-transition-to-dark::view-transition-new(root) {
+    z-index: 1;
+  }
+}

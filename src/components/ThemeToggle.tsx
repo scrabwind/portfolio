@@ -1,6 +1,9 @@
-import { useEffect, useState } from "react";
+import { type MouseEvent, useEffect, useState } from "react";
 
 const storageKey = "theme";
+let transitionSequence = 0;
+
+type ThemeMode = "light" | "dark";
 
 function getCurrentTheme() {
   if (typeof document === "undefined") {
@@ -11,18 +14,98 @@ function getCurrentTheme() {
 }
 
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState<"light" | "dark">(() => getCurrentTheme());
+  const [theme, setTheme] = useState<ThemeMode>(() => getCurrentTheme());
 
   useEffect(() => {
     setTheme(getCurrentTheme());
   }, []);
 
-  const toggleTheme = () => {
+  const toggleTheme = (event: MouseEvent<HTMLButtonElement>) => {
     const root = document.documentElement;
-    const nextTheme = theme === "dark" ? "light" : "dark";
-    root.classList.toggle("dark", nextTheme === "dark");
-    localStorage.setItem(storageKey, nextTheme);
-    setTheme(nextTheme);
+    const nextTheme: ThemeMode = theme === "dark" ? "light" : "dark";
+    const isSwitchingToLight = nextTheme === "light";
+    const transitionClass = isSwitchingToLight
+      ? "theme-transition-to-light"
+      : "theme-transition-to-dark";
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const supportsViewTransitions =
+      typeof CSS !== "undefined" &&
+      CSS.supports?.("selector(::view-transition-new(root))") &&
+      "startViewTransition" in document;
+
+    const applyTheme = () => {
+      root.classList.toggle("dark", nextTheme === "dark");
+      localStorage.setItem(storageKey, nextTheme);
+      setTheme(nextTheme);
+    };
+
+    if (!supportsViewTransitions || reduceMotion) {
+      applyTheme();
+      return;
+    }
+
+    const buttonRect = event.currentTarget.getBoundingClientRect();
+    const originX = buttonRect.left + buttonRect.width / 2;
+    const originY = buttonRect.top + buttonRect.height / 2;
+    const endRadius = Math.hypot(
+      Math.max(originX, window.innerWidth - originX),
+      Math.max(originY, window.innerHeight - originY),
+    );
+
+    const transitionId = ++transitionSequence;
+    root.classList.remove("theme-transition-to-light", "theme-transition-to-dark");
+    root.classList.add(transitionClass);
+
+    const clearTransitionClasses = () => {
+      if (transitionId !== transitionSequence) {
+        return;
+      }
+
+      root.classList.remove("theme-transition-to-light", "theme-transition-to-dark");
+    };
+
+    const transition = document.startViewTransition?.(() => {
+      applyTheme();
+    });
+
+    if (!transition) {
+      applyTheme();
+      clearTransitionClasses();
+      return;
+    }
+
+    void transition.finished.finally(() => {
+      clearTransitionClasses();
+    });
+
+    transition.ready
+      .then(() => {
+        const animationOptions: KeyframeAnimationOptions & { pseudoElement: string } = {
+          duration: 650,
+          easing: "cubic-bezier(0.4, 0, 0.2, 1)",
+          pseudoElement: isSwitchingToLight
+            ? "::view-transition-new(root)"
+            : "::view-transition-old(root)",
+        };
+
+        document.documentElement.animate(
+          {
+            clipPath: isSwitchingToLight
+              ? [
+                  `circle(0px at ${originX}px ${originY}px)`,
+                  `circle(${endRadius}px at ${originX}px ${originY}px)`,
+                ]
+              : [
+                  `circle(${endRadius}px at ${originX}px ${originY}px)`,
+                  `circle(0px at ${originX}px ${originY}px)`,
+                ],
+          },
+          animationOptions,
+        );
+      })
+      .catch(() => {
+        // Ignore aborted transitions caused by rapid toggles.
+      });
   };
 
   return (
