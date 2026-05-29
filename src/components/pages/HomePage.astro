@@ -36,7 +36,7 @@ const copy = getHomeCopy(locale);
 				<div class="relative">
 					<div class="flex items-center justify-between gap-3">
 						<LocaleButton label={copy.languageSwitcher.label} currentLocale={locale} />
-						<ThemeToggle client:only="react" {...copy.themeToggle} />
+						<ThemeToggle client:load {...copy.themeToggle} />
 					</div>
 
 					<p class="mt-8 text-sm font-semibold uppercase tracking-[0.18em] text-brand-accent-cyan">
@@ -75,7 +75,7 @@ const copy = getHomeCopy(locale);
 					</ul>
 
 					<div id="contact" class="mt-8 border-t border-brand-border pt-6">
-						<ContactBar client:only="react" title={copy.contact.title} items={copy.contact.items} />
+						<ContactBar client:load title={copy.contact.title} items={copy.contact.items} />
 					</div>
 				</div>
 			</section>

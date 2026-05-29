@@ -2,8 +2,58 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-display: optional;
+  font-weight: 400;
+  src: url("@fontsource/inter/files/inter-latin-400-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-display: optional;
+  font-weight: 500;
+  src: url("@fontsource/inter/files/inter-latin-500-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-display: optional;
+  font-weight: 600;
+  src: url("@fontsource/inter/files/inter-latin-600-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-display: optional;
+  font-weight: 700;
+  src: url("@fontsource/inter/files/inter-latin-700-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-display: optional;
+  font-weight: 800;
+  src: url("@fontsource/inter/files/inter-latin-800-normal.woff2") format("woff2");
+}
+
+/* Metrics-aligned fallback to reduce CLS when Inter is not ready yet. */
+@font-face {
+  font-family: "Inter Fallback";
+  src: local("Arial");
+  ascent-override: 90.2%;
+  descent-override: 22.5%;
+  line-gap-override: 0%;
+  size-adjust: 107.4%;
+}
+
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", "Inter Fallback", ui-sans-serif, system-ui, sans-serif;
   --color-brand-bg: #f4f7ff;
   --color-brand-bg-alt: #fcfdff;
   --color-brand-surface: #ffffff;

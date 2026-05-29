@@ -60,7 +60,7 @@ function ContactIconLink({ item }: { item: ContactItem }) {
             <span className="select-text">{item.value}</span>
             <span
               aria-hidden="true"
-              className="absolute -bottom-1 left-[1.375rem] h-2 w-2 -translate-x-1/2 rotate-45 border-b border-r border-brand-border bg-brand-surface"
+              className="absolute -bottom-1 left-5.5 h-2 w-2 -translate-x-1/2 rotate-45 border-b border-r border-brand-border bg-brand-surface"
             />
           </div>
         </div>

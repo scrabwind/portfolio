@@ -1,6 +1,8 @@
 ---
 import "../styles/global.css";
 import type { SupportedLocale } from "../i18n/home";
+import inter400LatinWoff2 from "@fontsource/inter/files/inter-latin-400-normal.woff2?url";
+import inter700LatinWoff2 from "@fontsource/inter/files/inter-latin-700-normal.woff2?url";
 
 interface Props {
 	title?: string;
@@ -17,12 +19,8 @@ const { title = "Portfolio", locale } = Astro.props;
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			rel="stylesheet"
-			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-		/>
+		<link rel="preload" href={inter400LatinWoff2} as="font" type="font/woff2" crossorigin />
+		<link rel="preload" href={inter700LatinWoff2} as="font" type="font/woff2" crossorigin />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 		<script is:inline>
