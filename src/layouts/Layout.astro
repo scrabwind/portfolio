@@ -1,4 +1,5 @@
 ---
+import { ClientRouter, fade } from "astro:transitions";
 import "../styles/global.css";
 import type { SupportedLocale } from "../i18n/home";
 import interVariableLatinWoff2 from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";
@@ -12,7 +13,7 @@ const { title = "Portfolio", locale } = Astro.props;
 ---
 
 <!doctype html>
-<html lang={locale}>
+<html transition:animate="fade" lang={locale}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
@@ -21,14 +22,20 @@ const { title = "Portfolio", locale } = Astro.props;
 		<link rel="preload" href={interVariableLatinWoff2} as="font" type="font/woff2" crossorigin />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+		<ClientRouter />
 		<script is:inline>
 			(() => {
 				const storageKey = "theme";
-				const storedTheme = localStorage.getItem(storageKey);
-				const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-				const shouldUseDark = storedTheme ? storedTheme === "dark" : systemPrefersDark;
+				const applyTheme = () => {
+					const storedTheme = localStorage.getItem(storageKey);
+					const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+					const shouldUseDark = storedTheme ? storedTheme === "dark" : systemPrefersDark;
 
-				document.documentElement.classList.toggle("dark", shouldUseDark);
+					document.documentElement.classList.toggle("dark", shouldUseDark);
+				};
+
+				document.addEventListener("astro:after-swap", applyTheme);
+				applyTheme();
 			})();
 		</script>
 		<script is:inline>
