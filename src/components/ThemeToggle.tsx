@@ -68,7 +68,7 @@ export default function ThemeToggle({
   switchToDarkAriaLabel,
   className = "",
 }: ThemeToggleProps) {
-  const [theme, setTheme] = useState<ThemeMode>(() => getCurrentTheme());
+  const [theme, setTheme] = useState<ThemeMode>("light");
 
   useEffect(() => {
     setTheme(getCurrentTheme());
