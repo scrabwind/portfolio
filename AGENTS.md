@@ -32,7 +32,12 @@ src/
 ```
 
 - **Generated files** — `.astro/` (types) and `dist/` (build output) are gitignored. Do not edit manually.
-- **Astro MCP** is already configured in `opencode.jsonc` — ask docs queries via the MCP server or the Astro docs search tool.
+
+## Astro documentation
+
+For Astro-related questions — APIs, integrations, routing, i18n, content collections, config, migrations, etc. — use the **Astro docs MCP** directly (`user-Astro docs` / `search_astro_docs`). It is configured in `opencode.jsonc` and searches the official Astro docs.
+
+Do **not** use context7 or other generic doc tools for Astro; the Astro MCP is the source of truth for this project.
 
 ## Browser verification
 

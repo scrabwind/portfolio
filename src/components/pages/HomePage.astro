@@ -3,7 +3,7 @@ import ExperienceTimeline from "../mockups/ExperienceTimeline.astro";
 import ProfileDetails from "../mockups/ProfileDetails.astro";
 import ProjectShowcase from "../mockups/ProjectShowcase.astro";
 import ContactBar from "../ContactBar";
-import LocaleMenu from "../LocaleMenu";
+import LocaleButton from "../LocaleButton.astro";
 import ThemeToggle from "../ThemeToggle";
 import Layout from "../../layouts/Layout.astro";
 import { getHomeCopy, type SupportedLocale } from "../../i18n/home";
@@ -14,11 +14,6 @@ interface Props {
 
 const { locale } = Astro.props;
 const copy = getHomeCopy(locale);
-
-const localeItems = [
-	{ code: "en", label: copy.languageSwitcher.englishLabel, href: "/en/" },
-	{ code: "pl", label: copy.languageSwitcher.polishLabel, href: "/pl/" },
-];
 ---
 
 <Layout title={copy.pageTitle} locale={locale}>
@@ -34,18 +29,13 @@ const localeItems = [
 					class="pointer-events-none absolute inset-0 overflow-hidden rounded-3xl"
 				>
 					<div
-						class="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[radial-gradient(circle,_rgba(180,95,255,0.5)_0%,_rgba(99,240,227,0.16)_42%,_transparent_72%)] blur-2xl"
+						class="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[radial-gradient(circle,rgba(180,95,255,0.5)_0%,rgba(99,240,227,0.16)_42%,transparent_72%)] blur-2xl"
 					>
 					</div>
 				</div>
 				<div class="relative">
 					<div class="flex items-center justify-between gap-3">
-						<LocaleMenu
-							client:only="react"
-							label={copy.languageSwitcher.label}
-							currentLocale={locale}
-							items={localeItems}
-						/>
+						<LocaleButton label={copy.languageSwitcher.label} currentLocale={locale} />
 						<ThemeToggle client:only="react" {...copy.themeToggle} />
 					</div>
 

@@ -72,8 +72,6 @@ type ThemeToggleCopy = {
 
 type LanguageSwitcherCopy = {
   label: string;
-  englishLabel: string;
-  polishLabel: string;
 };
 
 export type HomeCopy = {
@@ -246,8 +244,6 @@ const homeCopy: Record<SupportedLocale, HomeCopy> = {
     },
     languageSwitcher: {
       label: "Switch language",
-      englishLabel: "English",
-      polishLabel: "Polish",
     },
   },
   pl: {
@@ -408,12 +404,10 @@ const homeCopy: Record<SupportedLocale, HomeCopy> = {
     },
     languageSwitcher: {
       label: "Przelacz jezyk",
-      englishLabel: "Angielski",
-      polishLabel: "Polski",
     },
   },
 };
 
-export function getHomeCopy(locale: string | undefined): HomeCopy {
-  return locale === "pl" ? homeCopy.pl : homeCopy.en;
+export function getHomeCopy(locale: SupportedLocale): HomeCopy {
+  return homeCopy[locale];
 }

@@ -1,0 +1,21 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { supportedLocales, type SupportedLocale } from "../i18n/home";
+
+interface Props {
+	label: string;
+	currentLocale: SupportedLocale;
+}
+
+const { label, currentLocale } = Astro.props;
+const targetLocale =
+	supportedLocales.find((locale) => locale !== currentLocale) ?? supportedLocales[0];
+---
+
+<a
+	href={getRelativeLocaleUrl(targetLocale)}
+	aria-label={label}
+	class="cursor-pointer rounded-full border border-brand-border bg-brand-bg-alt px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.08em] text-brand-text shadow-sm transition hover:border-brand-accent-cyan hover:text-brand-accent-cyan"
+>
+	<span>{targetLocale}</span>
+</a>
