@@ -54,7 +54,7 @@ function ContactIconLink({ item }: { item: ContactItem }) {
       {open && (
         <div className="absolute bottom-full left-0 z-30 pb-2">
           <div className="relative whitespace-nowrap rounded-lg border border-brand-border bg-brand-surface px-3 py-1.5 text-xs font-medium text-brand-text shadow-lg shadow-black/20">
-            <span className="block text-[0.625rem] font-semibold uppercase tracking-[0.12em] text-brand-subtle">
+            <span className="block text-2xs font-semibold uppercase tracking-widest text-brand-subtle">
               {item.label}
             </span>
             <span className="select-text">{item.value}</span>

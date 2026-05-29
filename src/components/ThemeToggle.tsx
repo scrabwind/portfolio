@@ -172,7 +172,7 @@ export default function ThemeToggle({
       onClick={toggleTheme}
       aria-checked={isDark}
       aria-label={isDark ? switchToLightAriaLabel : switchToDarkAriaLabel}
-      className={`relative inline-flex h-8 w-[3.75rem] shrink-0 items-center rounded-full border border-brand-border bg-brand-bg-alt px-1 shadow-sm transition hover:border-brand-accent-cyan ${className}`}
+      className={`relative inline-flex h-8 w-15 shrink-0 items-center rounded-full border border-brand-border bg-brand-bg-alt px-1 shadow-sm transition hover:border-brand-accent-cyan ${className}`}
     >
       <span
         aria-hidden="true"
@@ -188,7 +188,7 @@ export default function ThemeToggle({
       </span>
       <span
         aria-hidden="true"
-        className={`pointer-events-none z-10 inline-flex h-6 w-6 items-center justify-center rounded-full bg-brand-surface text-brand-text shadow-md transition-transform duration-300 ease-out ${isDark ? "translate-x-[1.75rem]" : "translate-x-0"}`}
+        className={`pointer-events-none z-10 inline-flex h-6 w-6 items-center justify-center rounded-full bg-brand-surface text-brand-text shadow-md transition-transform duration-300 ease-out ${isDark ? "translate-x-7" : "translate-x-0"}`}
       >
         {isDark ? <MoonIcon /> : <SunIcon />}
       </span>
