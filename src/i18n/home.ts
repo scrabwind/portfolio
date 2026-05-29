@@ -1,6 +1,4 @@
-export const supportedLocales = ["en", "pl"] as const;
-
-export type SupportedLocale = (typeof supportedLocales)[number];
+export type SupportedLocale = "en" | "pl";
 
 type HeroCopy = {
   eyebrow: string;

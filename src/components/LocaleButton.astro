@@ -1,6 +1,6 @@
 ---
 import { getRelativeLocaleUrl } from "astro:i18n";
-import { supportedLocales, type SupportedLocale } from "../i18n/home";
+import type { SupportedLocale } from "../i18n/home";
 
 interface Props {
 	label: string;
@@ -8,8 +8,7 @@ interface Props {
 }
 
 const { label, currentLocale } = Astro.props;
-const targetLocale =
-	supportedLocales.find((locale) => locale !== currentLocale) ?? supportedLocales[0];
+const targetLocale: SupportedLocale = currentLocale === "pl" ? "en" : "pl";
 ---
 
 <a

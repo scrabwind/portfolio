@@ -1,27 +1,29 @@
 ---
+import { ClientRouter } from "astro:transitions";
+import type { SupportedLocale } from "../i18n/home";
+
+const fallbackLocale: SupportedLocale = Astro.currentLocale === "pl" ? "pl" : "en";
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={fallbackLocale}>
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>Redirecting...</title>
-		<meta http-equiv="refresh" content="0;url=/en/" />
-		<script is:inline>
+		<meta http-equiv="refresh" content={`0;url=/${fallbackLocale}/`} />
+    <ClientRouter />
+		<script is:inline define:vars={{ fallbackLocale }}>
 			(() => {
 				const localeStorageKey = "preferred-locale";
-				const supportedLocales = ["en", "pl"];
-				const fallbackLocale = "en";
 
 				const normalizeLocale = (value) => {
+					if (typeof value !== "string") return null;
+
 					const lower = value.toLowerCase();
-					if (lower === "pl" || lower.startsWith("pl-")) {
-						return "pl";
-					}
-					if (lower === "en" || lower.startsWith("en-")) {
-						return "en";
-					}
+					if (lower === "pl" || lower.startsWith("pl-")) return "pl";
+					if (lower === "en" || lower.startsWith("en-")) return "en";
+
 					return null;
 				};
 
@@ -41,7 +43,7 @@
 					normalizedStoredLocale ??
 					preferredBrowserLocale ??
 					fallbackLocale;
-				const safeTargetLocale = supportedLocales.includes(targetLocale) ? targetLocale : fallbackLocale;
+				const safeTargetLocale = targetLocale === "pl" ? "pl" : "en";
 
 				window.location.replace(`/${safeTargetLocale}/`);
 			})();
