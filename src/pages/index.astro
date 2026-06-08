@@ -1,5 +1,4 @@
 ---
-import { ClientRouter } from "astro:transitions";
 import type { SupportedLocale } from "../i18n/home";
 
 const fallbackLocale: SupportedLocale = Astro.currentLocale === "pl" ? "pl" : "en";
@@ -12,7 +11,6 @@ const fallbackLocale: SupportedLocale = Astro.currentLocale === "pl" ? "pl" : "e
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>Redirecting...</title>
 		<meta http-equiv="refresh" content={`0;url=/${fallbackLocale}/`} />
-    <ClientRouter />
 		<script is:inline define:vars={{ fallbackLocale }}>
 			(() => {
 				const localeStorageKey = "preferred-locale";
