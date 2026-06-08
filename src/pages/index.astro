@@ -43,7 +43,7 @@ const fallbackLocale: SupportedLocale = Astro.currentLocale === "pl" ? "pl" : "e
 					fallbackLocale;
 				const safeTargetLocale = targetLocale === "pl" ? "pl" : "en";
 
-				window.location.replace(`/${safeTargetLocale}/`);
+				window.location.replace(`/portfolio/${safeTargetLocale}/`);
 			})();
 		</script>
 	</head>
