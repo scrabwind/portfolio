@@ -21,7 +21,7 @@ const { title, description, caseStudyLabel, cards } = Astro.props;
 		{description}
 	</p>
 
-	<div class="mt-7 grid gap-4 md:grid-cols-3">
+	<div class="mt-7 flex flex-col gap-4">
 		{
 			cards.map((project, index) => (
 				<article
