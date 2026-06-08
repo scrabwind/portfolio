@@ -71,7 +71,10 @@ function ContactIconLink({ item }: { item: ContactItem }) {
 
 export default function ContactBar({ title, items, className = "" }: ContactBarProps) {
   return (
-    <ul aria-label={title} className={`flex flex-wrap items-center gap-3 ${className}`}>
+    <ul
+      aria-label={title}
+      className={`flex flex-wrap items-center justify-center gap-3 ${className}`}
+    >
       {items.map((item) => (
         <ContactIconLink key={item.label} item={item} />
       ))}

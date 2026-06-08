@@ -17,9 +17,9 @@ const copy = getHomeCopy(locale);
 ---
 
 <Layout title={copy.pageTitle} locale={locale}>
-	<div class="mx-auto max-w-6xl px-6 lg:flex lg:gap-10">
+	<div class="mx-auto max-w-[1280px] px-6 lg:flex lg:gap-10">
 		<aside
-			class="py-12 sm:py-16 lg:sticky lg:top-0 lg:max-h-screen lg:w-1/2 lg:overflow-y-auto lg:py-16"
+			class="py-12 space-y-8 sm:py-16 lg:sticky lg:top-0 lg:max-h-screen lg:w-1/2 lg:overflow-y-auto lg:py-16"
 		>
 			<section
 				class="relative rounded-3xl border border-brand-border bg-brand-surface p-8 sm:p-10"
@@ -36,6 +36,7 @@ const copy = getHomeCopy(locale);
 				<div class="relative">
 					<div class="flex items-center justify-between gap-3">
 						<LocaleButton label={copy.languageSwitcher.label} currentLocale={locale} />
+            <ContactBar client:load title={copy.contact.title} items={copy.contact.items} />
 						<ThemeToggle client:load {...copy.themeToggle} />
 					</div>
 
@@ -48,8 +49,7 @@ const copy = getHomeCopy(locale);
 					<p class="mt-5 text-base leading-7 text-brand-muted">
 						{copy.hero.description}
 					</p>
-
-					<div class="mt-8 flex flex-wrap gap-3">
+					<!-- <div class="mt-8 flex flex-wrap gap-3">
 						<a
 							href={copy.hero.primaryActionHref}
 							class="rounded-full border border-brand-accent-cyan bg-brand-accent-cyan/10 px-5 py-2.5 text-sm font-medium text-brand-text transition hover:bg-brand-accent-cyan/20"
@@ -62,9 +62,9 @@ const copy = getHomeCopy(locale);
 						>
 							{copy.hero.secondaryActionLabel}
 						</a>
-					</div>
+					</div> -->
 
-					<ul class="mt-7 flex flex-wrap gap-2">
+					<!-- <ul class="mt-7 flex flex-wrap gap-2">
 						{
 							copy.hero.stack.map((item) => (
 								<li class="rounded-full border border-brand-border bg-brand-bg-alt px-3 py-1 text-xs font-medium text-brand-muted">
@@ -72,16 +72,16 @@ const copy = getHomeCopy(locale);
 								</li>
 							))
 						}
-					</ul>
+					</ul> -->
 
-					<div id="contact" class="mt-8 border-t border-brand-border pt-6">
-						<ContactBar client:load title={copy.contact.title} items={copy.contact.items} />
-					</div>
+					
 				</div>
 			</section>
+      
+<ProfileDetails {...copy.profile} />
 		</aside>
 		<main class="space-y-8 pb-12 sm:pb-16 lg:w-1/2 lg:py-16">
-			<ProfileDetails {...copy.profile} />
+			<!-- <ProfileDetails {...copy.profile} /> -->
 			<ExperienceTimeline {...copy.experience} />
 			<ProjectShowcase {...copy.projects} />
 		</main>
